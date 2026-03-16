@@ -26,6 +26,20 @@ public class AuthController {
         }
     }
 
+
+     
+    @GetMapping("/")
+    public String root() {
+        return "Ultimate Flange API is running!";
+    }
+    
+    @GetMapping("/health")
+    public String health() {
+        return "OK";
+    }
+}
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         AuthResponse response = userService.login(request);  // ✅ login() method call karo
