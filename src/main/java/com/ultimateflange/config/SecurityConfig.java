@@ -43,9 +43,14 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(auth -> auth
+                        // ✅ PUBLIC ENDPOINTS - Bina token ke access
+                        .requestMatchers("/", "/health", "/error").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/products/**").permitAll()
                         .requestMatchers("/api/suppliers/**").permitAll()
+                        // ✅ OPTIONS requests sabke liye allow
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                        // ✅ BAQI SAB AUTHENTICATED
                         .anyRequest().authenticated()
                 );
 
